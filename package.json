@@ -1,0 +1,25 @@
+{
+  "name": "eth-civ",
+  "version": "1.0.0",
+  "description": "A 4x strategy game with similar elements as the popular 4x game, Civilization.",
+  "main": "client/src/App.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "@openzeppelin/contracts": "^4.5.0"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NoahMcGraw/eth-civ.git"
+  },
+  "author": "Noah McGraw",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NoahMcGraw/eth-civ/issues"
+  },
+  "homepage": "https://github.com/NoahMcGraw/eth-civ#readme"
+}

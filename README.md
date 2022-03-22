@@ -1,1 +1,1 @@
-This is a demonstration of creating a DAPP using Reactjs as the client and eth smart contracts for storing the account information.
+A 4x strategy game with similar elements as the popular 4x game, Civilization.
