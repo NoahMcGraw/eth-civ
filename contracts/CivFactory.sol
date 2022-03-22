@@ -1,7 +1,12 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.0;
 
-contract Account {
-  uint256 public balance = 0;
+contract CivFactory {
+
+  struct Player {
+    uint id;
+    string name;
+    
+  }
 
   constructor() public {
   }

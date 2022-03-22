@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Account from "./contracts/Account.json";
+import CivFactory from "./contracts/CivFactory.json";
 import getWeb3 from "./getWeb3";
 import Header from "./components/header"
 import AccountView from "./components/accountView"
@@ -19,11 +19,13 @@ class App extends Component {
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = Account.networks[networkId];
+      const deployedNetwork = CivFactory.networks[networkId];
       const instance = new web3.eth.Contract(
-        Account.abi,
+        CivFactory.abi,
         deployedNetwork && deployedNetwork.address, {gas: 22000}
       );
+
+      console.log(web3.eth.net)
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.

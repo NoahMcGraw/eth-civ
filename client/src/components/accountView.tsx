@@ -14,6 +14,7 @@ const AccountView = ({accounts, contract}: AccountViewProps) => {
 
   const getBalance = async () => {
 
+    console.log(contract)
     const gasPriceMin = await getGasPrice(accounts, contract.methods.balance);
     console.log(gasPriceMin)
     // Get the value from the contract to prove it worked.
