@@ -1,23 +1,8 @@
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "./MapFactory.sol";
 
-
-contract CivFactory is Ownable {
-
-  using SafeMath for uint256;
-
-  struct GameSession {
-    string name;
-    uint8 mapSize;
-    uint8 maxPlayers;
-    uint8 playerCount;
-  }
-
-  mapping(address => uint) playerToCiv;
-
-  GameSession public game;
+contract CivFactory is MapFactory {
 
   struct Civilization {
     address owner;
@@ -31,86 +16,22 @@ contract CivFactory is Ownable {
   mapping (uint => uint) public cityToCiv;
   mapping (uint => uint) public civCityCount;
 
-  enum TileType {
-    Plains,
-    Grassland,
-    Desert,
-    Tundra,
-    Snow,
-    PlainsHills,
-    GrasslandHills,
-    DesertHills,
-    TundraHills,
-    SnowHills,
-    PlainsMountains,
-    GrasslandMountains,
-    DesertMountains,
-    TundraMountains,
-    SnowMountains,
-    Coast,
-    Ocean
+
+  constructor () {
+    // do nothing
   }
 
-  enum TileResource {
-    Wheat,
-    Rice,
-    Corn,
-    Cows,
-    Sheep,
-    Horses,
-    Stone,
-    Copper,
-    Iron,
-    Coal,
-    Niter,
-    Oil,
-    Uranium
-  }
-
-  enum TileImprovement {
-    Farm,
-    Pasture,
-    Camp,
-    Plantation,
-    Quarry,
-    Mine,
-    Outpost,
-    Village,
-    Wall,
-    Gate
-  }
-
-  struct Tile {
-    TileType tileType;
-    TileResource tileResource;
-    TileImprovement TileImprovement;
-  }
-
-  Tile[] public mapTiles;
-
-  mapping (uint8 => mapping ( uint8 => uint )) public coordToTile;
-  mapping (uint => uint) public tileToCity;
-  mapping (uint => uint) cityTileCount;
-
-
-  struct City {
-    string name;
-    uint level;
-  }
-
-  City[] public cities;
-
-  mapping (uint => address) public cityToPlayer;
-  mapping (address => uint) playerCityCount;
-  mapping (uint => uint) cityToTile;
-
-  function createNewGame (string memory _name, uint8 _mapSize, uint8 _maxPlayers) private onlyOwner {
-    game = GameSession(_name, _mapSize, _maxPlayers, 0);
-  }
-
-  constructor(string memory _name, uint8 _mapSize, uint8 _maxPlayers) {
-    require(msg.sender == owner());
-    createNewGame(_name, _mapSize, _maxPlayers);
+  /**
+    Creates a new civ for a player who is not already playing the game
+    @param _name string: Name of the civ
+    @param _leader string: Name of the civ's leader
+   */
+  function createNewCiv (string memory _name, string memory _leader) public onlyNewPlayer {
+    require(game.playerCount + 1 <= game.maxPlayers);
+    game.playerCount++;
+    civs[game.playerCount] = Civilization(msg.sender, _name, 0, _leader);
+    playerToCiv[msg.sender] = game.playerCount;
+    // Spawn new hero with name of the leader and put them on the map.
   }
 
 }

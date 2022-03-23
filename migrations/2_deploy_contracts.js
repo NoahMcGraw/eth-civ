@@ -1,5 +1,5 @@
-var CivFactory = artifacts.require("./CivFactory.sol");
+var GameFactory = artifacts.require("./GameFactory.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(CivFactory, "test", 255, 4);
+  deployer.deploy(GameFactory, "test", 16, 16, 4);
 };
