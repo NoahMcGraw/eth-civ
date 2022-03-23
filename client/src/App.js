@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CivFactory from "./contracts/CivFactory.json";
+import GameFactory from "./contracts/GameFactory.json";
 import getWeb3 from "./getWeb3";
 import Header from "./components/header"
 import AccountView from "./components/accountView"
@@ -19,9 +19,9 @@ class App extends Component {
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = CivFactory.networks[networkId];
+      const deployedNetwork = GameFactory.networks[networkId];
       const instance = new web3.eth.Contract(
-        CivFactory.abi,
+        GameFactory.abi,
         deployedNetwork && deployedNetwork.address, {gas: 22000}
       );
 
